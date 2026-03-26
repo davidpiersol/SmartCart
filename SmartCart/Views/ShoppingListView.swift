@@ -112,26 +112,44 @@ struct ShoppingListView: View {
         List {
             if let shoppingStoreName = viewModel.shoppingModeStoreName {
                 Section {
-                    HStack(spacing: 10) {
+                    HStack(spacing: 12) {
                         Image(systemName: "figure.walk.motion")
-                            .imageScale(.large)
+                            .font(.title3.weight(.semibold))
+                            .foregroundStyle(.accent)
+                            .frame(width: 34, height: 34)
+                            .background(Color.accentColor.opacity(0.12))
+                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+
                         VStack(alignment: .leading, spacing: 2) {
                             Text("Shopping at \(shoppingStoreName)")
-                                .font(.headline)
+                                .font(.headline.weight(.semibold))
                             Text("Optimized route is active")
-                                .font(.caption)
+                                .font(.caption.weight(.medium))
                                 .foregroundStyle(.secondary)
+                                .textCase(.uppercase)
+                                .tracking(0.6)
                         }
+
                         Spacer(minLength: 0)
+
                         Button("End") {
-                            withAnimation(.snappy(duration: 0.2)) {
+                            withAnimation(.snappy(duration: 0.22)) {
                                 viewModel.deactivateShoppingMode()
                             }
                         }
                         .buttonStyle(.bordered)
                     }
-                    .padding(.vertical, 4)
+                    .padding(12)
+                    .background(
+                        LinearGradient(
+                            colors: [Color.accentColor.opacity(0.16), Color.accentColor.opacity(0.06)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                 }
+                .listRowBackground(Color.clear)
             }
 
             Section {
@@ -141,6 +159,7 @@ struct ShoppingListView: View {
                     }
                 }
                 .pickerStyle(.segmented)
+                .padding(.vertical, 2)
             }
 
             if displayMode == .standard {
@@ -149,8 +168,9 @@ struct ShoppingListView: View {
                 Section {
                     Toggle("Start Shopping", isOn: $startShoppingMode)
                         .font(.subheadline.weight(.semibold))
+                        .toggleStyle(.switch)
+                        .controlSize(.large)
                 }
-                .toggleStyle(.switch)
 
                 OptimizedRouteView(
                     route: viewModel.optimizedRoute(for: list),

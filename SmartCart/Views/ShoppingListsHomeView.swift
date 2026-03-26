@@ -80,20 +80,42 @@ struct ShoppingListsHomeView: View {
         }
         .safeAreaInset(edge: .top) {
             if let shoppingStoreName = viewModel.shoppingModeStoreName {
-                HStack(spacing: 8) {
+                HStack(spacing: 12) {
                     Image(systemName: "figure.walk.motion")
-                    Text("Shopping at \(shoppingStoreName)")
+                        .font(.title3.weight(.semibold))
+                        .foregroundStyle(.accent)
+                        .frame(width: 32, height: 32)
+                        .background(Color.accentColor.opacity(0.12))
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Shopping at \(shoppingStoreName)")
+                            .font(.subheadline.weight(.semibold))
+                        Text("Route mode enabled")
+                            .font(.caption2.weight(.medium))
+                            .foregroundStyle(.secondary)
+                            .textCase(.uppercase)
+                            .tracking(0.6)
+                    }
+
                     Spacer(minLength: 0)
+
                     Button("End") {
                         viewModel.deactivateShoppingMode()
                     }
                     .buttonStyle(.bordered)
                 }
-                .font(.footnote.weight(.semibold))
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color.accentColor.opacity(0.12))
+                .padding(12)
+                .background(
+                    LinearGradient(
+                        colors: [Color.accentColor.opacity(0.16), Color.accentColor.opacity(0.06)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                .padding(.horizontal, 8)
+                .padding(.top, 4)
             } else if let store = viewModel.activeStore {
                 HStack(spacing: 8) {
                     Image(systemName: "mappin.and.ellipse")

@@ -66,33 +66,51 @@ struct OptimizedRouteView: View {
 
     private var progressCard: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Progress")
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(.secondary)
+            HStack(alignment: .firstTextBaseline) {
+                Text("Progress")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                    .textCase(.uppercase)
+                    .tracking(0.7)
+                Spacer(minLength: 0)
+                Text("\(route.completedItems)/\(route.totalItems)")
+                    .font(.caption.weight(.bold))
+                    .foregroundStyle(.secondary)
+            }
             Text("\(route.completedItems) of \(route.totalItems) items completed")
-                .font(.subheadline.weight(.semibold))
+                .font(startShoppingMode ? .headline.weight(.semibold) : .subheadline.weight(.semibold))
             ProgressView(value: Double(route.completedItems), total: Double(max(route.totalItems, 1)))
                 .tint(.accentColor)
         }
-        .padding(12)
-        .background(Color(.secondarySystemGroupedBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .padding(14)
+        .background(
+            LinearGradient(
+                colors: [Color(.secondarySystemGroupedBackground), Color.accentColor.opacity(0.04)],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 
     private func routeHeader(stop: OptimizedRoute.Stop, stepIndex: Int) -> some View {
         let isHighlighted = highlightedStopId == stop.id
         return HStack(spacing: 8) {
-            Text("Stop \(stepIndex)")
-                .font(.caption2.weight(.bold))
-                .padding(.horizontal, 8)
-                .padding(.vertical, 4)
-                .background(isHighlighted ? Color.accentColor.opacity(0.2) : Color(.tertiarySystemFill))
-                .clipShape(Capsule())
+            ZStack {
+                Circle()
+                    .fill(isHighlighted ? Color.accentColor : Color(.tertiarySystemFill))
+                Text("\(stepIndex)")
+                    .font(.caption.weight(.bold))
+                    .foregroundStyle(isHighlighted ? .white : .secondary)
+            }
+            .frame(width: 22, height: 22)
+
             Text(stop.title)
-                .font(.headline)
+                .font(startShoppingMode ? .title3.weight(.semibold) : .headline)
             Spacer(minLength: 0)
             if isHighlighted {
-                Text("Next")
+                Label("Next", systemImage: "arrow.forward.circle.fill")
+                    .labelStyle(.titleAndIcon)
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.accent)
             }
