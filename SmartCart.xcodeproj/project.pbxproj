@@ -16,11 +16,11 @@
 		C01F00000100000000000007 /* ShoppingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F00000100000000000007 /* ShoppingList.swift */; };
 		C01F00000100000000000008 /* SmartCart.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C02F00000100000000000008 /* SmartCart.xcdatamodeld */; };
 		C01F00000100000000000009 /* SmartCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F00000100000000000009 /* SmartCartViewModel.swift */; };
+		C01F0000010000000000000A /* FeatureExtensionPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000000A /* FeatureExtensionPoints.swift */; };
+		C01F0000010000000000000B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000000B /* Assets.xcassets */; };
 		C01F0000010000000000000C /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000000C /* AppState.swift */; };
 		C01F0000010000000000000D /* EditItemSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000000D /* EditItemSheet.swift */; };
 		C01F0000010000000000000E /* ShoppingListsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000000E /* ShoppingListsHomeView.swift */; };
-		C01F0000010000000000000A /* FeatureExtensionPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000000A /* FeatureExtensionPoints.swift */; };
-		C01F0000010000000000000B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000000B /* Assets.xcassets */; };
 		C01F00000100000000000101 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F00000100000000000101 /* PersistenceController.swift */; };
 		C01F00000100000000000102 /* UserDefaultsImportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F00000100000000000102 /* UserDefaultsImportService.swift */; };
 		C01F00000100000000000103 /* ShoppingListStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F00000100000000000103 /* ShoppingListStore.swift */; };
@@ -42,10 +42,17 @@
 		E0A100000001000000000017 /* ShoppingModeAndSeedStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A100000001000000000016 /* ShoppingModeAndSeedStoreTests.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E0A100000001000000000008 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C09F00000100000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C06F00000100000000000001;
+			remoteInfo = SmartCart;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		C03F00000100000000000001 /* SmartCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E0A100000001000000000002 /* SmartCartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartCartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E0A100000001000000000001 /* ShoppingListStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListStoreTests.swift; sourceTree = "<group>"; };
 		C02F00000100000000000001 /* SmartCartApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartCartApp.swift; sourceTree = "<group>"; };
 		C02F00000100000000000002 /* ShoppingListRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListRootView.swift; sourceTree = "<group>"; };
 		C02F00000100000000000003 /* ShoppingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListView.swift; sourceTree = "<group>"; };
@@ -55,11 +62,11 @@
 		C02F00000100000000000007 /* ShoppingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingList.swift; sourceTree = "<group>"; };
 		C02F00000100000000000008 /* SmartCart.xcdatamodeld */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodeld; path = SmartCart.xcdatamodeld; sourceTree = "<group>"; };
 		C02F00000100000000000009 /* SmartCartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartCartViewModel.swift; sourceTree = "<group>"; };
+		C02F0000010000000000000A /* FeatureExtensionPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureExtensionPoints.swift; sourceTree = "<group>"; };
+		C02F0000010000000000000B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C02F0000010000000000000C /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		C02F0000010000000000000D /* EditItemSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemSheet.swift; sourceTree = "<group>"; };
 		C02F0000010000000000000E /* ShoppingListsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListsHomeView.swift; sourceTree = "<group>"; };
-		C02F0000010000000000000A /* FeatureExtensionPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureExtensionPoints.swift; sourceTree = "<group>"; };
-		C02F0000010000000000000B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C02F00000100000000000101 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		C02F00000100000000000102 /* UserDefaultsImportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsImportService.swift; sourceTree = "<group>"; };
 		C02F00000100000000000103 /* ShoppingListStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListStore.swift; sourceTree = "<group>"; };
@@ -74,6 +81,9 @@
 		C02F0000010000000000010C /* StoreSeedCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreSeedCatalog.swift; sourceTree = "<group>"; };
 		C02F0000010000000000010D /* StoreGeofencingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreGeofencingService.swift; sourceTree = "<group>"; };
 		C02F0000010000000000010E /* DebugGeofencePanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugGeofencePanelView.swift; sourceTree = "<group>"; };
+		C03F00000100000000000001 /* SmartCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0A100000001000000000001 /* ShoppingListStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListStoreTests.swift; sourceTree = "<group>"; };
+		E0A100000001000000000002 /* SmartCartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartCartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0A100000001000000000010 /* CategorizationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorizationServiceTests.swift; sourceTree = "<group>"; };
 		E0A100000001000000000013 /* StoreAwareSortingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreAwareSortingTests.swift; sourceTree = "<group>"; };
 		E0A100000001000000000014 /* RouteOptimizationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteOptimizationServiceTests.swift; sourceTree = "<group>"; };
@@ -107,27 +117,6 @@
 			);
 			sourceTree = "<group>";
 		};
-		C05F00000100000000000003 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C03F00000100000000000001 /* SmartCart.app */,
-				E0A100000001000000000002 /* SmartCartTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E0A10000000100000000000C /* SmartCartTests */ = {
-			isa = PBXGroup;
-			children = (
-				E0A100000001000000000001 /* ShoppingListStoreTests.swift */,
-				E0A100000001000000000010 /* CategorizationServiceTests.swift */,
-				E0A100000001000000000013 /* StoreAwareSortingTests.swift */,
-				E0A100000001000000000014 /* RouteOptimizationServiceTests.swift */,
-				E0A100000001000000000016 /* ShoppingModeAndSeedStoreTests.swift */,
-			);
-			path = SmartCartTests;
-			sourceTree = "<group>";
-		};
 		C05F00000100000000000002 /* SmartCart */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +132,15 @@
 			path = SmartCart;
 			sourceTree = "<group>";
 		};
+		C05F00000100000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C03F00000100000000000001 /* SmartCart.app */,
+				E0A100000001000000000002 /* SmartCartTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C05F00000100000000000004 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,17 +152,6 @@
 				C02F00000100000000000007 /* ShoppingList.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		C05F0000010000000000000D /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				C02F00000100000000000105 /* CategorizationService.swift */,
-				C02F0000010000000000010A /* RouteOptimizationService.swift */,
-				C02F0000010000000000010C /* StoreSeedCatalog.swift */,
-				C02F0000010000000000010D /* StoreGeofencingService.swift */,
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		C05F00000100000000000005 /* ViewModels */ = {
@@ -190,6 +177,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		C05F00000100000000000008 /* Future */ = {
+			isa = PBXGroup;
+			children = (
+				C02F0000010000000000000A /* FeatureExtensionPoints.swift */,
+			);
+			path = Future;
+			sourceTree = "<group>";
+		};
 		C05F00000100000000000009 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,12 +206,27 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
-		C05F00000100000000000008 /* Future */ = {
+		C05F0000010000000000000D /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				C02F0000010000000000000A /* FeatureExtensionPoints.swift */,
+				C02F00000100000000000105 /* CategorizationService.swift */,
+				C02F0000010000000000010A /* RouteOptimizationService.swift */,
+				C02F0000010000000000010C /* StoreSeedCatalog.swift */,
+				C02F0000010000000000010D /* StoreGeofencingService.swift */,
 			);
-			path = Future;
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E0A10000000100000000000C /* SmartCartTests */ = {
+			isa = PBXGroup;
+			children = (
+				E0A100000001000000000001 /* ShoppingListStoreTests.swift */,
+				E0A100000001000000000010 /* CategorizationServiceTests.swift */,
+				E0A100000001000000000013 /* StoreAwareSortingTests.swift */,
+				E0A100000001000000000014 /* RouteOptimizationServiceTests.swift */,
+				E0A100000001000000000016 /* ShoppingModeAndSeedStoreTests.swift */,
+			);
+			path = SmartCartTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,24 +267,6 @@
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
-
-/* Begin PBXContainerItemProxy section */
-		E0A100000001000000000008 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C09F00000100000000000001 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C06F00000100000000000001;
-			remoteInfo = SmartCart;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXTargetDependency section */
-		E0A100000001000000000007 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C06F00000100000000000001 /* SmartCart */;
-			targetProxy = E0A100000001000000000008 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXProject section */
 		C09F00000100000000000001 /* Project object */ = {
@@ -371,6 +363,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E0A100000001000000000007 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C06F00000100000000000001 /* SmartCart */;
+			targetProxy = E0A100000001000000000008 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C0AF00000100000000000001 /* Debug */ = {
@@ -499,12 +499,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8L2VWNPL98;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = SmartCart;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SmartCart uses your location to detect when you arrive at a saved store and offer Shopping Mode.";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SmartCart uses your location to detect when you arrive at a saved store and offer Shopping Mode.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -522,7 +523,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				ENABLE_TESTABILITY = YES;
 			};
 			name = Debug;
 		};
@@ -533,12 +533,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8L2VWNPL98;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = SmartCart;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SmartCart uses your location to detect when you arrive at a saved store and offer Shopping Mode.";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SmartCart uses your location to detect when you arrive at a saved store and offer Shopping Mode.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
