@@ -32,10 +32,13 @@
 		C01F00000100000000000109 /* ManageAislesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F00000100000000000109 /* ManageAislesView.swift */; };
 		C01F0000010000000000010A /* RouteOptimizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000010A /* RouteOptimizationService.swift */; };
 		C01F0000010000000000010B /* OptimizedRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000010B /* OptimizedRouteView.swift */; };
+		C01F0000010000000000010C /* StoreSeedCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000010C /* StoreSeedCatalog.swift */; };
+		C01F0000010000000000010D /* StoreGeofencingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000010D /* StoreGeofencingService.swift */; };
 		E0A100000001000000000003 /* ShoppingListStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A100000001000000000001 /* ShoppingListStoreTests.swift */; };
 		E0A100000001000000000011 /* CategorizationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A100000001000000000010 /* CategorizationServiceTests.swift */; };
 		E0A100000001000000000012 /* StoreAwareSortingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A100000001000000000013 /* StoreAwareSortingTests.swift */; };
 		E0A100000001000000000015 /* RouteOptimizationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A100000001000000000014 /* RouteOptimizationServiceTests.swift */; };
+		E0A100000001000000000017 /* ShoppingModeAndSeedStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A100000001000000000016 /* ShoppingModeAndSeedStoreTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,9 +70,12 @@
 		C02F00000100000000000109 /* ManageAislesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAislesView.swift; sourceTree = "<group>"; };
 		C02F0000010000000000010A /* RouteOptimizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteOptimizationService.swift; sourceTree = "<group>"; };
 		C02F0000010000000000010B /* OptimizedRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptimizedRouteView.swift; sourceTree = "<group>"; };
+		C02F0000010000000000010C /* StoreSeedCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreSeedCatalog.swift; sourceTree = "<group>"; };
+		C02F0000010000000000010D /* StoreGeofencingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreGeofencingService.swift; sourceTree = "<group>"; };
 		E0A100000001000000000010 /* CategorizationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorizationServiceTests.swift; sourceTree = "<group>"; };
 		E0A100000001000000000013 /* StoreAwareSortingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreAwareSortingTests.swift; sourceTree = "<group>"; };
 		E0A100000001000000000014 /* RouteOptimizationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteOptimizationServiceTests.swift; sourceTree = "<group>"; };
+		E0A100000001000000000016 /* ShoppingModeAndSeedStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingModeAndSeedStoreTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +121,7 @@
 				E0A100000001000000000010 /* CategorizationServiceTests.swift */,
 				E0A100000001000000000013 /* StoreAwareSortingTests.swift */,
 				E0A100000001000000000014 /* RouteOptimizationServiceTests.swift */,
+				E0A100000001000000000016 /* ShoppingModeAndSeedStoreTests.swift */,
 			);
 			path = SmartCartTests;
 			sourceTree = "<group>";
@@ -152,6 +159,8 @@
 			children = (
 				C02F00000100000000000105 /* CategorizationService.swift */,
 				C02F0000010000000000010A /* RouteOptimizationService.swift */,
+				C02F0000010000000000010C /* StoreSeedCatalog.swift */,
+				C02F0000010000000000010D /* StoreGeofencingService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -335,6 +344,8 @@
 				C01F00000100000000000104 /* GroceryCategory.swift in Sources */,
 				C01F00000100000000000105 /* CategorizationService.swift in Sources */,
 				C01F0000010000000000010A /* RouteOptimizationService.swift in Sources */,
+				C01F0000010000000000010C /* StoreSeedCatalog.swift in Sources */,
+				C01F0000010000000000010D /* StoreGeofencingService.swift in Sources */,
 				C01F00000100000000000106 /* Store.swift in Sources */,
 				C01F00000100000000000107 /* Aisle.swift in Sources */,
 				C01F00000100000000000108 /* ManageStoresView.swift in Sources */,
@@ -351,6 +362,7 @@
 				E0A100000001000000000011 /* CategorizationServiceTests.swift in Sources */,
 				E0A100000001000000000012 /* StoreAwareSortingTests.swift in Sources */,
 				E0A100000001000000000015 /* RouteOptimizationServiceTests.swift in Sources */,
+				E0A100000001000000000017 /* ShoppingModeAndSeedStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +499,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = SmartCart;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SmartCart uses your location to detect when you arrive at a saved store and offer Shopping Mode.";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -520,6 +533,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = SmartCart;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SmartCart uses your location to detect when you arrive at a saved store and offer Shopping Mode.";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

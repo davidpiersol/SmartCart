@@ -1,11 +1,20 @@
 import Foundation
 import SwiftUI
 
+enum ShoppingListDisplayMode: String, CaseIterable, Identifiable {
+    case standard = "List"
+    case optimizedRoute = "Route"
+
+    var id: String { rawValue }
+}
+
 /// Coordinates shopping lists and items; all persistence goes through `ShoppingListStore` (Core Data in production).
 @MainActor
 final class SmartCartViewModel: ObservableObject {
     @Published private(set) var state: AppState
     @Published var lastErrorMessage: String?
+    @Published var preferredListDisplayMode: ShoppingListDisplayMode = .standard
+    @Published private(set) var shoppingModeStoreId: UUID?
 
     private let store: ShoppingListStore
     private let routeOptimizer: RouteOptimizing
@@ -46,6 +55,12 @@ final class SmartCartViewModel: ObservableObject {
     func ensureDefaultListIfNeeded() {
         guard state.lists.isEmpty else { return }
         perform { _ = try self.store.createList(named: "My List") }
+    }
+
+    func ensureSeedStoresIfNeeded() {
+        perform {
+            try self.store.upsertSeedStores(StoreSeedCatalog.albuquerqueMVP)
+        }
     }
 
     /// Creates a list and returns its id (for programmatic navigation). Errors surface via `lastErrorMessage`.
@@ -99,6 +114,21 @@ final class SmartCartViewModel: ObservableObject {
         perform {
             try self.store.setActiveStore(id: id)
         }
+    }
+
+    func activateShoppingMode(for store: Store) {
+        setActiveStore(id: store.id)
+        preferredListDisplayMode = .optimizedRoute
+        shoppingModeStoreId = store.id
+    }
+
+    func deactivateShoppingMode() {
+        shoppingModeStoreId = nil
+    }
+
+    var shoppingModeStoreName: String? {
+        guard let id = shoppingModeStoreId else { return nil }
+        return state.stores.first(where: { $0.id == id })?.name
     }
 
     func createAisle(storeId: UUID, name: String) {
@@ -301,6 +331,10 @@ final class SmartCartViewModel: ObservableObject {
     private func refresh() {
         do {
             state = try store.loadState()
+            if let activeShoppingId = shoppingModeStoreId,
+               !state.stores.contains(where: { $0.id == activeShoppingId }) {
+                shoppingModeStoreId = nil
+            }
             routeCache.removeAll()
         } catch {
             lastErrorMessage = error.localizedDescription

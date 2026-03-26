@@ -13,7 +13,8 @@ struct OptimizedRouteView: View {
     }
 
     var body: some View {
-        if route.totalItems == 0 {
+        Group {
+            if route.totalItems == 0 {
             Section {
                 ContentUnavailableView(
                     "No route yet",
@@ -24,41 +25,43 @@ struct OptimizedRouteView: View {
                 .padding(.vertical, 24)
                 .listRowBackground(Color.clear)
             }
-        } else {
-            Section {
-                progressCard
-            }
-            .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
-            .listRowBackground(Color.clear)
-
-            ForEach(Array(route.stops.enumerated()), id: \.element.id) { idx, stop in
+            } else {
                 Section {
-                    ForEach(stop.items) { item in
-                        ShoppingItemRowView(
-                            item: item,
-                            showsCategorySubtitle: !stop.isUnassigned,
-                            onToggle: { onToggle(item) },
-                            onEdit: { itemToEdit(item) }
-                        )
-                    }
-                    .onDelete { offsets in
-                        onDelete(offsets, stop.items)
-                    }
-                } header: {
-                    routeHeader(stop: stop, stepIndex: idx + 1)
-                } footer: {
-                    if idx < route.stops.count - 1 {
-                        HStack(spacing: 6) {
-                            Image(systemName: "arrow.down")
-                            Text("Continue to next aisle")
+                    progressCard
+                }
+                .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                .listRowBackground(Color.clear)
+
+                ForEach(Array(route.stops.enumerated()), id: \.element.id) { idx, stop in
+                    Section {
+                        ForEach(stop.items) { item in
+                            ShoppingItemRowView(
+                                item: item,
+                                showsCategorySubtitle: !stop.isUnassigned,
+                                onToggle: { onToggle(item) },
+                                onEdit: { itemToEdit(item) }
+                            )
                         }
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .padding(.top, 6)
+                        .onDelete { offsets in
+                            onDelete(offsets, stop.items)
+                        }
+                    } header: {
+                        routeHeader(stop: stop, stepIndex: idx + 1)
+                    } footer: {
+                        if idx < route.stops.count - 1 {
+                            HStack(spacing: 6) {
+                                Image(systemName: "arrow.down")
+                                Text("Continue to next aisle")
+                            }
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .padding(.top, 6)
+                        }
                     }
                 }
             }
         }
+        .environment(\.defaultMinListRowHeight, startShoppingMode ? 62 : 44)
     }
 
     private var progressCard: some View {

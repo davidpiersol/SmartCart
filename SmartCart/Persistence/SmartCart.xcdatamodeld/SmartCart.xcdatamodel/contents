@@ -19,8 +19,11 @@
         <relationship name="store" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StoreEntity" inverseName="lists" inverseEntity="StoreEntity"/>
     </entity>
     <entity name="StoreEntity" representedClassName="StoreEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="geofenceRadiusMeters" optional="NO" attributeType="Double" defaultValueString="150" usesScalarValueType="YES"/>
         <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isDefault" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
         <attribute name="name" optional="NO" attributeType="String"/>
         <relationship name="aisles" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AisleEntity" inverseName="store" inverseEntity="AisleEntity"/>
         <relationship name="lists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ShoppingListEntity" inverseName="store" inverseEntity="ShoppingListEntity"/>

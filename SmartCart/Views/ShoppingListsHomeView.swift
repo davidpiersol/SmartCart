@@ -79,7 +79,22 @@ struct ShoppingListsHomeView: View {
             }
         }
         .safeAreaInset(edge: .top) {
-            if let store = viewModel.activeStore {
+            if let shoppingStoreName = viewModel.shoppingModeStoreName {
+                HStack(spacing: 8) {
+                    Image(systemName: "figure.walk.motion")
+                    Text("Shopping at \(shoppingStoreName)")
+                    Spacer(minLength: 0)
+                    Button("End") {
+                        viewModel.deactivateShoppingMode()
+                    }
+                    .buttonStyle(.bordered)
+                }
+                .font(.footnote.weight(.semibold))
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.accentColor.opacity(0.12))
+            } else if let store = viewModel.activeStore {
                 HStack(spacing: 8) {
                     Image(systemName: "mappin.and.ellipse")
                     Text("Active store: \(store.name)")

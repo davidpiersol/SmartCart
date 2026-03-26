@@ -2,20 +2,13 @@ import SwiftUI
 
 /// Detail screen for one list: grouped by category, add via toolbar sheet, edit via row tap.
 struct ShoppingListView: View {
-    private enum DisplayMode: String, CaseIterable, Identifiable {
-        case standard = "List"
-        case optimizedRoute = "Route"
-
-        var id: String { rawValue }
-    }
-
     @ObservedObject var viewModel: SmartCartViewModel
     let listId: UUID
 
     @State private var showingAddItem = false
     @State private var itemToEdit: ShoppingItem?
     @State private var expandedSectionIds: Set<String> = []
-    @State private var displayMode: DisplayMode = .standard
+    @State private var displayMode: ShoppingListDisplayMode = .standard
     @State private var startShoppingMode = false
 
     var body: some View {
@@ -99,14 +92,51 @@ struct ShoppingListView: View {
             actions: { Button("OK") { viewModel.lastErrorMessage = nil } },
             message: { Text(viewModel.lastErrorMessage ?? "") }
         )
+        .onAppear {
+            displayMode = viewModel.preferredListDisplayMode
+            startShoppingMode = viewModel.shoppingModeStoreName != nil
+        }
+        .onChange(of: viewModel.preferredListDisplayMode) { _, mode in
+            displayMode = mode
+        }
+        .onChange(of: displayMode) { _, mode in
+            viewModel.preferredListDisplayMode = mode
+        }
+        .onChange(of: viewModel.shoppingModeStoreName) { _, storeName in
+            startShoppingMode = storeName != nil
+        }
     }
 
     @ViewBuilder
     private func listBody(list: ShoppingList) -> some View {
         List {
+            if let shoppingStoreName = viewModel.shoppingModeStoreName {
+                Section {
+                    HStack(spacing: 10) {
+                        Image(systemName: "figure.walk.motion")
+                            .imageScale(.large)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Shopping at \(shoppingStoreName)")
+                                .font(.headline)
+                            Text("Optimized route is active")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        Spacer(minLength: 0)
+                        Button("End") {
+                            withAnimation(.snappy(duration: 0.2)) {
+                                viewModel.deactivateShoppingMode()
+                            }
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                    .padding(.vertical, 4)
+                }
+            }
+
             Section {
                 Picker("View mode", selection: $displayMode) {
-                    ForEach(DisplayMode.allCases) { mode in
+                    ForEach(ShoppingListDisplayMode.allCases) { mode in
                         Text(mode.rawValue).tag(mode)
                     }
                 }

@@ -12,6 +12,7 @@ protocol ShoppingListStore: AnyObject {
     func deleteList(id: UUID) throws
 
     func createStore(named: String) throws -> UUID
+    func upsertSeedStores(_ seeds: [SeedStoreDefinition]) throws
     func deleteStore(id: UUID) throws
     func setActiveStore(id: UUID?) throws
     func createAisle(storeId: UUID, name: String) throws -> UUID
@@ -96,12 +97,53 @@ final class CoreDataShoppingListStore: ShoppingListStore {
         mo.id = id
         mo.name = finalName
         mo.isDefault = false
+        mo.geofenceRadiusMeters = 150
         try saveContext()
 
         if currentActiveStoreId() == nil {
             try setActiveStore(id: id)
         }
         return id
+    }
+
+    func upsertSeedStores(_ seeds: [SeedStoreDefinition]) throws {
+        guard !seeds.isEmpty else { return }
+        let request: NSFetchRequest<StoreEntity> = StoreEntity.fetchRequest()
+        let existing = try viewContext.fetch(request)
+        var byName: [String: StoreEntity] = [:]
+        for store in existing {
+            byName[(store.name ?? "").trimmingCharacters(in: .whitespacesAndNewlines).lowercased()] = store
+        }
+
+        var firstCreatedId: UUID?
+        for seed in seeds {
+            let key = seed.name.lowercased()
+            if let entity = byName[key] {
+                entity.latitude = seed.latitude
+                entity.longitude = seed.longitude
+                entity.geofenceRadiusMeters = seed.radiusMeters
+                entity.name = seed.name
+            } else {
+                let mo = StoreEntity(context: viewContext)
+                let id = UUID()
+                mo.id = id
+                mo.name = seed.name
+                mo.isDefault = false
+                mo.latitude = seed.latitude
+                mo.longitude = seed.longitude
+                mo.geofenceRadiusMeters = seed.radiusMeters
+                byName[key] = mo
+                if firstCreatedId == nil {
+                    firstCreatedId = id
+                }
+            }
+        }
+
+        try saveContext()
+
+        if currentActiveStoreId() == nil, let firstCreatedId {
+            try setActiveStore(id: firstCreatedId)
+        }
     }
 
     func deleteStore(id: UUID) throws {
@@ -333,7 +375,15 @@ final class CoreDataShoppingListStore: ShoppingListStore {
         guard let id = entity.id else { return nil }
         let aisles = (entity.aisles as? Set<AisleEntity> ?? [])
             .compactMap(mapAisle)
-        return Store(id: id, name: entity.name ?? "Store", isDefault: entity.isDefault, aisles: aisles)
+        return Store(
+            id: id,
+            name: entity.name ?? "Store",
+            isDefault: entity.isDefault,
+            latitude: entity.latitude,
+            longitude: entity.longitude,
+            geofenceRadiusMeters: entity.geofenceRadiusMeters > 0 ? entity.geofenceRadiusMeters : 150,
+            aisles: aisles
+        )
     }
 
     private func mapAisle(_ entity: AisleEntity) -> Aisle? {
