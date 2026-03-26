@@ -2,12 +2,21 @@ import SwiftUI
 
 /// Detail screen for one list: grouped by category, add via toolbar sheet, edit via row tap.
 struct ShoppingListView: View {
+    private enum DisplayMode: String, CaseIterable, Identifiable {
+        case standard = "List"
+        case optimizedRoute = "Route"
+
+        var id: String { rawValue }
+    }
+
     @ObservedObject var viewModel: SmartCartViewModel
     let listId: UUID
 
     @State private var showingAddItem = false
     @State private var itemToEdit: ShoppingItem?
     @State private var expandedSectionIds: Set<String> = []
+    @State private var displayMode: DisplayMode = .standard
+    @State private var startShoppingMode = false
 
     var body: some View {
         Group {
@@ -94,50 +103,86 @@ struct ShoppingListView: View {
 
     @ViewBuilder
     private func listBody(list: ShoppingList) -> some View {
-        let sections = viewModel.sectionsForList(list)
         List {
-            if !sections.isEmpty {
-                ForEach(sections) { section in
-                    DisclosureGroup(
-                        isExpanded: binding(for: section.id),
-                        content: {
-                            ForEach(section.items) { item in
-                                ShoppingItemRowView(
-                                    item: item,
-                                    showsCategorySubtitle: false,
-                                    onToggle: {
-                                        withAnimation(.snappy(duration: 0.28)) {
-                                            viewModel.toggleCompleted(listId: listId, item: item)
-                                        }
-                                    },
-                                    onEdit: { itemToEdit = item }
-                                )
-                            }
-                            .onDelete { offsets in
-                                viewModel.deleteItems(at: offsets, from: section.items, listId: listId)
-                            }
-                        },
-                        label: {
-                            sectionLabel(section: section, itemCount: section.items.count)
-                        }
-                    )
+            Section {
+                Picker("View mode", selection: $displayMode) {
+                    ForEach(DisplayMode.allCases) { mode in
+                        Text(mode.rawValue).tag(mode)
+                    }
                 }
+                .pickerStyle(.segmented)
             }
 
-            if list.items.isEmpty {
+            if displayMode == .standard {
+                standardListSections(list: list)
+            } else {
                 Section {
-                    ContentUnavailableView(
-                        "Nothing here yet",
-                        systemImage: "basket",
-                        description: Text("Tap + to add your first item. Categories are suggested automatically, or pick one to keep it fixed.")
-                    )
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 24)
-                    .listRowBackground(Color.clear)
+                    Toggle("Start Shopping", isOn: $startShoppingMode)
+                        .font(.subheadline.weight(.semibold))
                 }
+                .toggleStyle(.switch)
+
+                OptimizedRouteView(
+                    route: viewModel.optimizedRoute(for: list),
+                    startShoppingMode: startShoppingMode,
+                    itemToEdit: { itemToEdit = $0 },
+                    onToggle: { item in
+                        withAnimation(.snappy(duration: 0.28)) {
+                            viewModel.toggleCompleted(listId: listId, item: item)
+                        }
+                    },
+                    onDelete: { offsets, items in
+                        viewModel.deleteItems(at: offsets, from: items, listId: listId)
+                    }
+                )
             }
         }
         .listStyle(.insetGrouped)
+    }
+
+    @ViewBuilder
+    private func standardListSections(list: ShoppingList) -> some View {
+        let sections = viewModel.sectionsForList(list)
+        if !sections.isEmpty {
+            ForEach(sections) { section in
+                DisclosureGroup(
+                    isExpanded: binding(for: section.id),
+                    content: {
+                        ForEach(section.items) { item in
+                            ShoppingItemRowView(
+                                item: item,
+                                showsCategorySubtitle: false,
+                                onToggle: {
+                                    withAnimation(.snappy(duration: 0.28)) {
+                                        viewModel.toggleCompleted(listId: listId, item: item)
+                                    }
+                                },
+                                onEdit: { itemToEdit = item }
+                            )
+                        }
+                        .onDelete { offsets in
+                            viewModel.deleteItems(at: offsets, from: section.items, listId: listId)
+                        }
+                    },
+                    label: {
+                        sectionLabel(section: section, itemCount: section.items.count)
+                    }
+                )
+            }
+        }
+
+        if list.items.isEmpty {
+            Section {
+                ContentUnavailableView(
+                    "Nothing here yet",
+                    systemImage: "basket",
+                    description: Text("Tap + to add your first item. Categories are suggested automatically, or pick one to keep it fixed.")
+                )
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 24)
+                .listRowBackground(Color.clear)
+            }
+        }
     }
 
     private func sectionLabel(section: SmartCartViewModel.ListDisplaySection, itemCount: Int) -> some View {

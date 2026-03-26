@@ -8,12 +8,19 @@ final class SmartCartViewModel: ObservableObject {
     @Published var lastErrorMessage: String?
 
     private let store: ShoppingListStore
+    private let routeOptimizer: RouteOptimizing
+    private var routeCache: [UUID: OptimizedRoute] = [:]
     /// Rule-based today; inject a different `ItemCategorizing` for tests or future ML/API backends.
     let categorization: ItemCategorizing
 
-    init(store: ShoppingListStore, categorization: ItemCategorizing = RuleBasedCategorizationService()) {
+    init(
+        store: ShoppingListStore,
+        categorization: ItemCategorizing = RuleBasedCategorizationService(),
+        routeOptimizer: RouteOptimizing = RouteOptimizationService()
+    ) {
         self.store = store
         self.categorization = categorization
+        self.routeOptimizer = routeOptimizer
         self.state = AppState()
         refresh()
     }
@@ -270,6 +277,18 @@ final class SmartCartViewModel: ObservableObject {
         })?.id
     }
 
+    func optimizedRoute(for list: ShoppingList) -> OptimizedRoute {
+        if let cached = routeCache[list.id] {
+            return cached
+        }
+        let route = routeOptimizer.buildRoute(
+            items: list.items,
+            aisles: activeStore?.aislesByOrder ?? []
+        )
+        routeCache[list.id] = route
+        return route
+    }
+
     private func perform(_ action: () throws -> Void) {
         do {
             try action()
@@ -282,6 +301,7 @@ final class SmartCartViewModel: ObservableObject {
     private func refresh() {
         do {
             state = try store.loadState()
+            routeCache.removeAll()
         } catch {
             lastErrorMessage = error.localizedDescription
         }

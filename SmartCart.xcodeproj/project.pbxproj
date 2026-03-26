@@ -30,9 +30,12 @@
 		C01F00000100000000000107 /* Aisle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F00000100000000000107 /* Aisle.swift */; };
 		C01F00000100000000000108 /* ManageStoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F00000100000000000108 /* ManageStoresView.swift */; };
 		C01F00000100000000000109 /* ManageAislesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F00000100000000000109 /* ManageAislesView.swift */; };
+		C01F0000010000000000010A /* RouteOptimizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000010A /* RouteOptimizationService.swift */; };
+		C01F0000010000000000010B /* OptimizedRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000010B /* OptimizedRouteView.swift */; };
 		E0A100000001000000000003 /* ShoppingListStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A100000001000000000001 /* ShoppingListStoreTests.swift */; };
 		E0A100000001000000000011 /* CategorizationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A100000001000000000010 /* CategorizationServiceTests.swift */; };
 		E0A100000001000000000012 /* StoreAwareSortingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A100000001000000000013 /* StoreAwareSortingTests.swift */; };
+		E0A100000001000000000015 /* RouteOptimizationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A100000001000000000014 /* RouteOptimizationServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,8 +65,11 @@
 		C02F00000100000000000107 /* Aisle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aisle.swift; sourceTree = "<group>"; };
 		C02F00000100000000000108 /* ManageStoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageStoresView.swift; sourceTree = "<group>"; };
 		C02F00000100000000000109 /* ManageAislesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAislesView.swift; sourceTree = "<group>"; };
+		C02F0000010000000000010A /* RouteOptimizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteOptimizationService.swift; sourceTree = "<group>"; };
+		C02F0000010000000000010B /* OptimizedRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptimizedRouteView.swift; sourceTree = "<group>"; };
 		E0A100000001000000000010 /* CategorizationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorizationServiceTests.swift; sourceTree = "<group>"; };
 		E0A100000001000000000013 /* StoreAwareSortingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreAwareSortingTests.swift; sourceTree = "<group>"; };
+		E0A100000001000000000014 /* RouteOptimizationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteOptimizationServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +114,7 @@
 				E0A100000001000000000001 /* ShoppingListStoreTests.swift */,
 				E0A100000001000000000010 /* CategorizationServiceTests.swift */,
 				E0A100000001000000000013 /* StoreAwareSortingTests.swift */,
+				E0A100000001000000000014 /* RouteOptimizationServiceTests.swift */,
 			);
 			path = SmartCartTests;
 			sourceTree = "<group>";
@@ -144,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				C02F00000100000000000105 /* CategorizationService.swift */,
+				C02F0000010000000000010A /* RouteOptimizationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -162,6 +170,7 @@
 				C02F00000100000000000002 /* ShoppingListRootView.swift */,
 				C02F0000010000000000000E /* ShoppingListsHomeView.swift */,
 				C02F00000100000000000003 /* ShoppingListView.swift */,
+				C02F0000010000000000010B /* OptimizedRouteView.swift */,
 				C02F00000100000000000108 /* ManageStoresView.swift */,
 				C02F00000100000000000109 /* ManageAislesView.swift */,
 				C05F00000100000000000009 /* Components */,
@@ -325,10 +334,12 @@
 				C01F00000100000000000103 /* ShoppingListStore.swift in Sources */,
 				C01F00000100000000000104 /* GroceryCategory.swift in Sources */,
 				C01F00000100000000000105 /* CategorizationService.swift in Sources */,
+				C01F0000010000000000010A /* RouteOptimizationService.swift in Sources */,
 				C01F00000100000000000106 /* Store.swift in Sources */,
 				C01F00000100000000000107 /* Aisle.swift in Sources */,
 				C01F00000100000000000108 /* ManageStoresView.swift in Sources */,
 				C01F00000100000000000109 /* ManageAislesView.swift in Sources */,
+				C01F0000010000000000010B /* OptimizedRouteView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +350,7 @@
 				E0A100000001000000000003 /* ShoppingListStoreTests.swift in Sources */,
 				E0A100000001000000000011 /* CategorizationServiceTests.swift in Sources */,
 				E0A100000001000000000012 /* StoreAwareSortingTests.swift in Sources */,
+				E0A100000001000000000015 /* RouteOptimizationServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
