@@ -7,6 +7,9 @@ struct ShoppingListRootView: View {
     @State private var path = NavigationPath()
     @State private var showingStorePrompt = false
     @State private var showingLocationDeniedAlert = false
+    #if DEBUG
+    @State private var showingDebugPanel = false
+    #endif
 
     init(persistence: PersistenceController = .shared) {
         let store = CoreDataShoppingListStore(container: persistence.container)
@@ -17,6 +20,27 @@ struct ShoppingListRootView: View {
         NavigationStack(path: $path) {
             ShoppingListsHomeView(viewModel: viewModel, path: $path)
         }
+        #if DEBUG
+        .overlay(alignment: .bottomTrailing) {
+            Button {
+                showingDebugPanel = true
+            } label: {
+                Image(systemName: "ladybug.fill")
+                    .font(.title3.weight(.semibold))
+                    .foregroundStyle(.white)
+                    .frame(width: 44, height: 44)
+                    .background(Color.red.gradient)
+                    .clipShape(Circle())
+                    .shadow(color: .black.opacity(0.2), radius: 6, y: 2)
+            }
+            .padding(.trailing, 16)
+            .padding(.bottom, 18)
+            .accessibilityLabel("Open geofence debug panel")
+        }
+        .sheet(isPresented: $showingDebugPanel) {
+            DebugGeofencePanelView(geofencing: geofencing)
+        }
+        #endif
         .task {
             viewModel.ensureDefaultListIfNeeded()
             viewModel.ensureSeedStoresIfNeeded()

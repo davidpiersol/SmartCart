@@ -34,6 +34,7 @@
 		C01F0000010000000000010B /* OptimizedRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000010B /* OptimizedRouteView.swift */; };
 		C01F0000010000000000010C /* StoreSeedCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000010C /* StoreSeedCatalog.swift */; };
 		C01F0000010000000000010D /* StoreGeofencingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000010D /* StoreGeofencingService.swift */; };
+		C01F0000010000000000010E /* DebugGeofencePanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02F0000010000000000010E /* DebugGeofencePanelView.swift */; };
 		E0A100000001000000000003 /* ShoppingListStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A100000001000000000001 /* ShoppingListStoreTests.swift */; };
 		E0A100000001000000000011 /* CategorizationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A100000001000000000010 /* CategorizationServiceTests.swift */; };
 		E0A100000001000000000012 /* StoreAwareSortingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A100000001000000000013 /* StoreAwareSortingTests.swift */; };
@@ -72,6 +73,7 @@
 		C02F0000010000000000010B /* OptimizedRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptimizedRouteView.swift; sourceTree = "<group>"; };
 		C02F0000010000000000010C /* StoreSeedCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreSeedCatalog.swift; sourceTree = "<group>"; };
 		C02F0000010000000000010D /* StoreGeofencingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreGeofencingService.swift; sourceTree = "<group>"; };
+		C02F0000010000000000010E /* DebugGeofencePanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugGeofencePanelView.swift; sourceTree = "<group>"; };
 		E0A100000001000000000010 /* CategorizationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorizationServiceTests.swift; sourceTree = "<group>"; };
 		E0A100000001000000000013 /* StoreAwareSortingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreAwareSortingTests.swift; sourceTree = "<group>"; };
 		E0A100000001000000000014 /* RouteOptimizationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteOptimizationServiceTests.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				C02F0000010000000000000E /* ShoppingListsHomeView.swift */,
 				C02F00000100000000000003 /* ShoppingListView.swift */,
 				C02F0000010000000000010B /* OptimizedRouteView.swift */,
+				C02F0000010000000000010E /* DebugGeofencePanelView.swift */,
 				C02F00000100000000000108 /* ManageStoresView.swift */,
 				C02F00000100000000000109 /* ManageAislesView.swift */,
 				C05F00000100000000000009 /* Components */,
@@ -346,6 +349,7 @@
 				C01F0000010000000000010A /* RouteOptimizationService.swift in Sources */,
 				C01F0000010000000000010C /* StoreSeedCatalog.swift in Sources */,
 				C01F0000010000000000010D /* StoreGeofencingService.swift in Sources */,
+				C01F0000010000000000010E /* DebugGeofencePanelView.swift in Sources */,
 				C01F00000100000000000106 /* Store.swift in Sources */,
 				C01F00000100000000000107 /* Aisle.swift in Sources */,
 				C01F00000100000000000108 /* ManageStoresView.swift in Sources */,

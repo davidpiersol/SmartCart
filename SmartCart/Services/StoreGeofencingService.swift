@@ -3,9 +3,20 @@ import Foundation
 
 @MainActor
 final class StoreGeofencingService: NSObject, ObservableObject {
+    struct DebugRegion: Identifiable, Equatable {
+        var id: String
+        var name: String
+        var radiusMeters: Double
+        var latitude: Double
+        var longitude: Double
+    }
+
     @Published private(set) var authorizationStatus: CLAuthorizationStatus = .notDetermined
     @Published private(set) var pendingStoreChoices: [Store] = []
     @Published private(set) var exitedStoreId: UUID?
+    @Published private(set) var monitoredDebugRegions: [DebugRegion] = []
+    @Published private(set) var lastGeofenceEvent: String = "None"
+    @Published private(set) var lastKnownLocationText: String = "Unknown"
 
     private let manager = CLLocationManager()
     private var stores: [Store] = []
@@ -72,6 +83,7 @@ final class StoreGeofencingService: NSObject, ObservableObject {
             manager.startMonitoring(for: region)
             manager.requestState(for: region)
         }
+        publishDebugSnapshot()
     }
 
     private func nearestCandidateStores() -> [Store] {
@@ -109,6 +121,26 @@ final class StoreGeofencingService: NSObject, ObservableObject {
             candidates = [triggeredStore]
         }
         pendingStoreChoices = candidates.sorted { $0.name < $1.name }
+        if let triggeredStore {
+            lastGeofenceEvent = "Entered region near \(triggeredStore.name)"
+        } else {
+            lastGeofenceEvent = "Entered store region (unresolved)"
+        }
+    }
+
+    private func publishDebugSnapshot() {
+        let mapped: [DebugRegion] = manager.monitoredRegions.compactMap { region in
+            guard let circular = region as? CLCircularRegion else { return nil }
+            let store = monitoredStoreByIdentifier[circular.identifier]
+            return DebugRegion(
+                id: circular.identifier,
+                name: store?.name ?? "Unknown store",
+                radiusMeters: circular.radius,
+                latitude: circular.center.latitude,
+                longitude: circular.center.longitude
+            )
+        }
+        monitoredDebugRegions = mapped.sorted { $0.name < $1.name }
     }
 }
 
@@ -118,6 +150,7 @@ extension StoreGeofencingService: CLLocationManagerDelegate {
             authorizationStatus = manager.authorizationStatus
             startLocationTrackingIfAuthorized()
             refreshMonitoredRegions()
+            lastGeofenceEvent = "Authorization changed: \(manager.authorizationStatus.rawValue)"
         }
     }
 
@@ -125,6 +158,11 @@ extension StoreGeofencingService: CLLocationManagerDelegate {
         guard let latest = locations.last else { return }
         Task { @MainActor in
             currentLocation = latest
+            lastKnownLocationText = String(
+                format: "%.5f, %.5f",
+                latest.coordinate.latitude,
+                latest.coordinate.longitude
+            )
             refreshMonitoredRegions()
         }
     }
@@ -137,6 +175,7 @@ extension StoreGeofencingService: CLLocationManagerDelegate {
         Task { @MainActor in
             let store = monitoredStoreByIdentifier[region.identifier]
             handlePotentialEntry(triggeredStore: store)
+            publishDebugSnapshot()
         }
     }
 
@@ -145,12 +184,19 @@ extension StoreGeofencingService: CLLocationManagerDelegate {
         Task { @MainActor in
             let store = monitoredStoreByIdentifier[region.identifier]
             handlePotentialEntry(triggeredStore: store)
+            publishDebugSnapshot()
         }
     }
 
     nonisolated func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         Task { @MainActor in
             exitedStoreId = UUID(uuidString: region.identifier)
+            if let store = monitoredStoreByIdentifier[region.identifier] {
+                lastGeofenceEvent = "Exited region: \(store.name)"
+            } else {
+                lastGeofenceEvent = "Exited region: \(region.identifier)"
+            }
+            publishDebugSnapshot()
         }
     }
 }
