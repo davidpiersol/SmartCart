@@ -1,20 +1,26 @@
 import SwiftUI
 
-/// Hosts the shopping list feature and owns the view model lifecycle.
+/// Root navigation stack; inject `PersistenceController` for tests and previews.
 struct ShoppingListRootView: View {
-    @StateObject private var viewModel: ShoppingListViewModel
+    @StateObject private var viewModel: SmartCartViewModel
+    @State private var path = NavigationPath()
 
-    init() {
-        _viewModel = StateObject(
-            wrappedValue: ShoppingListViewModel(repository: UserDefaultsShoppingListRepository())
-        )
+    init(persistence: PersistenceController = .shared) {
+        let store = CoreDataShoppingListStore(container: persistence.container)
+        _viewModel = StateObject(wrappedValue: SmartCartViewModel(store: store))
     }
 
     var body: some View {
-        ShoppingListView(viewModel: viewModel)
+        NavigationStack(path: $path) {
+            ShoppingListsHomeView(viewModel: viewModel, path: $path)
+        }
+        .task {
+            viewModel.ensureDefaultListIfNeeded()
+        }
     }
 }
 
 #Preview {
-    ShoppingListRootView()
+    ShoppingListRootView(persistence: .preview)
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }

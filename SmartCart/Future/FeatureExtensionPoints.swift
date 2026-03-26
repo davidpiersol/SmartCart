@@ -1,6 +1,6 @@
 import Foundation
 
-// MARK: - Future feature seams (no implementations in Phase 1)
+// MARK: - Future feature seams (routing, maps — not implemented yet)
 
 /// When aisle-aware sorting ships, items can expose or resolve an `AisleRef` for a given `StoreID`.
 protocol AisleSortableItem {
@@ -24,7 +24,12 @@ protocol ShoppingRoutePlanning {
     // ) async throws -> [UUID]
 }
 
-/// Later, categories can become a taxonomy (ID, synonyms, default aisles) instead of free text.
+/// `ShoppingItem.category` is persisted in Core Data today; a taxonomy service can normalize values later.
 protocol CategoryTaxonomy {
     // func normalizedCategory(for raw: String) async throws -> CategoryID?
 }
+
+// MARK: - Phase 3 categorization seam
+
+/// `ItemCategorizing` (see `CategorizationService.swift`) is the injection point for smarter backends:
+/// Core ML on-device models, remote APIs, or store-specific aisle graphs—without changing view models.
